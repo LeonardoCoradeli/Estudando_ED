@@ -1,3 +1,0 @@
-C:/Users/Hmmm1/OneDrive/Documentos/String dinamica/cmake-build-debug/CMakeFiles/String_dinamica.dir
-C:/Users/Hmmm1/OneDrive/Documentos/String dinamica/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Hmmm1/OneDrive/Documentos/String dinamica/cmake-build-debug/CMakeFiles/rebuild_cache.dir
