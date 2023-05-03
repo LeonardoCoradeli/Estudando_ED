@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "String_dinamica.h"
+#include <stdlib.h>
+#include "./String_dinamica.h"
 
 #define DIV printf("------------------------------------------------\n");
 
@@ -11,21 +12,21 @@ int main()
     //str *String1;//cria um ponteiro q aponta para o primeiro lugar da string
     //ini(&String1);//incia a string
     //-----------------------------------------------------------------------------------
-    //2) Limpa uma string dinâmica(tive que preencher ela primeiro)
-    char v[MAX];//vetor que recebe a info do usuário
+    //2) Limpa uma string dinï¿½mica(tive que preencher ela primeiro)
+    char v[MAX];//vetor que recebe a info do usuï¿½rio
     str *String2,*aux;
     ini(&String2);
     ini(&aux);
     printf("Digite algo: ");
     fgets(v,MAX,stdin);
-    v[strcspn(v, "\n")] = '\0';//fgets pega o \n tambem então isso serve para tirar ele
-    for(int i=0;i<strlen(v);i++){//roda a string do usuário
+    v[strcspn(v, "\n")] = '\0';//fgets pega o \n tambem entï¿½o isso serve para tirar ele
+    for(size_t i=0;i<strlen(v);i++){//roda a string do usuï¿½rio
         inserir_str(&String2,v[i]);//transforma o que foi inserido em uma string dinamica
     }
     copiar(&aux,&String2);
-    //verificação se o código funciona
+    //verificaï¿½ï¿½o se o cï¿½digo funciona
     imprimir(&String2);
-    limpar_str(&String2);//caso queira contar a string transforme essas 2 em comentários
+    limpar_str(&String2);//caso queira contar a string transforme essas 2 em comentï¿½rios
     //imprimir(&String2);
     copiar(&String2,&aux);
     DIV;/*
