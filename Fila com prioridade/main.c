@@ -8,13 +8,12 @@ typedef struct NO{
 }No;
 
 typedef struct{
-    No *primeiro,*ultimo;
+    No *primeiro;
     int tam;
 }Fila;
 
 void ini(Fila *fila){
     fila->primeiro=NULL;
-    fila->ultimo=NULL;
     fila->tam=0;
 }
 
@@ -26,7 +25,7 @@ void inserir(Fila *fila, int elem,int prioridade) {
     
     if (fila->primeiro==NULL) {
         fila->primeiro = novo;
-        fila->ultimo = novo;
+        fila->tam++;
     } else {
         No *aux=fila->primeiro;
         while (aux->prox != NULL && aux->prioridade <= prioridade) {
@@ -34,6 +33,7 @@ void inserir(Fila *fila, int elem,int prioridade) {
         }
         novo->prox = aux->prox;
         aux->prox = novo;
+        fila->tam++;
     }
 }
 
@@ -46,14 +46,14 @@ void imprimir(Fila *fila){
     }
 }
 
-void remover(Fila *fila, int posicao) {
-    No *aux = fila->primeiro;
-    for (int i = 0; i < posicao - 1; i++) {
-        aux = aux->prox;
-    }
-    No *no_remover = aux->prox;
-    aux->prox = aux->prox->prox;
-    free(no_remover);
+void remover(Fila *fila) {
+    if(fila->primeiro==NULL){
+        printf("Essa fila esta vazia\n");
+        return;}
+    No *aux=fila->primeiro;
+    fila->primeiro=aux->prox;
+    free(aux);
+    fila->tam--;
 }
 
 
@@ -86,7 +86,7 @@ int main()
     inserir(&fila,8,1);
     inserir(&fila,13,2);
     imprimir(&fila);
-    remover(&fila,2);
+    remover(&fila);
     printf("\n");
     imprimir(&fila);
     return 0;
