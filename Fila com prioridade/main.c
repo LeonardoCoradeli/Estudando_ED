@@ -26,14 +26,27 @@ void inserir(Fila *fila, int elem,int prioridade) {
     if (fila->primeiro==NULL) {
         fila->primeiro = novo;
         fila->tam++;
-    } else {
+    } 
+    else if(fila->primeiro->prioridade>prioridade){
+        novo->prox = fila->primeiro;
+        fila->primeiro=novo;
+        fila->tam++;
+    }
+    else {
         No *aux=fila->primeiro;
-        while (aux->prox != NULL && aux->prioridade <= prioridade) {
+        while (aux->prox != NULL && aux->prox->prioridade <= prioridade) {
             aux = aux->prox;
         }
-        novo->prox = aux->prox;
-        aux->prox = novo;
-        fila->tam++;
+        if (aux->prox==NULL){
+            aux->prox=novo;
+            fila->tam++;
+        }
+        else{
+            novo->prox = aux->prox;
+            aux->prox = novo;
+            fila->tam++;
+        }
+        
     }
 }
 
@@ -77,15 +90,18 @@ int main()
 {
     Fila fila;
     ini(&fila);
-    inserir(&fila,10,0);
-    inserir(&fila,15,0);
-    inserir(&fila,11,0);
-    inserir(&fila,13,0);
+    inserir(&fila,10,1);
+    inserir(&fila,15,1);
+    inserir(&fila,11,1);
+    inserir(&fila,13,1);
     inserir(&fila,1,1);
     inserir(&fila,6,1);
     inserir(&fila,8,1);
     inserir(&fila,13,2);
     imprimir(&fila);
+    printf("\n");
+    inserir(&fila,23,0);
+    inserir(&fila,14,0);
     remover(&fila);
     printf("\n");
     imprimir(&fila);
