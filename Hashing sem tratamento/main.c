@@ -2,33 +2,44 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define tam_tabela 10
+#define max 5
 
-typedef char String[100];
+typedef struct Aluno{
+    int matricula;              
+    char nome[80];     
+    char email[40];
+}tpAluno;
 
-typedef struct HASH {
-    String linhas[tam_tabela];
-} Hash;
-
-
-int funchash(String cpf){
-    int soma=0,total=strlen(cpf);
-
-    for(int i=0;i<total;i++){
-        soma=soma+(i+1)*(int)(cpf[i]);
-    }
-    soma=soma%tam_tabela;
-    return soma;
-}
-
-void insere(Hash *tabela,String elem){
-    int indice=funchash(elem);
-    strcpy(tabela->linhas[indice],elem);
+int funchash(int matricula){
+    int indice=0;
+    indice = matricula%max;
+    
+    return indice;
 }
 
 int main(){
-    Hash tabela;
-    insere(&tabela,"000.000.000-00");
-
+    tpAluno tabelahash[max], *tbhash[max];
+    for (int i=0; i<max; i++){
+        tabelahash[i].matricula = -1;
+    }
+    tabelahash[0].matricula = 201;
+    strcpy(tabelahash[0].nome, "Carlos");
+    strcpy(tabelahash[0].email, "carlos@gmail.com");
+    tabelahash[2].matricula = 123;
+    strcpy(tabelahash[2].nome, "Ronaldo");
+    strcpy(tabelahash[2].email, "ronaldo@gmail.com");
+    tabelahash[3].matricula = 985;
+    strcpy(tabelahash[3].nome, "Murilo");
+    strcpy(tabelahash[3].email, "murilo@gmail.com");
+    
+    for (int i=0; i<max; i++){
+        if (tabelahash[i].matricula != -1){
+            tbhash[funchash(tabelahash[i].matricula)] = &tabelahash[i];
+        }
+    }
+    
+    for (int i=0;i<max;i++){
+        (tbhash[i]!=NULL)?(printf("%d      %s\n",i,tbhash[i]->nome)):printf("%d\n",i);
+    }
     return 0;
 }
